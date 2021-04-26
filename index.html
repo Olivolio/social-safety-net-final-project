@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+
+	<script type="text/javascript" src="./literacy-data.js"></script>
+	<style type="text/css">
+		body {
+			background: white;
+		}
+		main {
+			display: flex;
+			width:100%;
+		}
+		#controls {
+			padding:10px;
+		}
+		canvas {
+			background: black;
+		}
+	</style>
+</head>
+<body>
+	<h1>SNAP</h1>
+	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+	tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+	quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+	consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+	cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+	proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+<main>
+	<canvas width="800" height="480" id="canvas"></canvas>
+	<div id="controls">
+		<h2>Controls</h2>
+		<form>
+			<input type="checkbox" id="expand1" name="expand1" value="expand1">
+			<label for="vehicle1"> Expand income to households with $X/year</label><br>
+			<input type="checkbox" id="expand2" name="expand2" value="expand1>
+			<label for="vehicle2"> Expand work to X</label><br>
+			<input type="checkbox" id="expand3" name="expand3" value="expand1">
+			<label for="vehicle3"> Cover basic hygeiene products</label><br>
+			<hr />
+			<h3>Show</h3>
+			<input type="radio" id="show1" name="show1" value="show1">
+			<label for="vehicle1"> Death rate</label><br>
+			<input type="radio" id="show2" name="show2" value="show2">
+			<label for="vehicle2"> Povery rate</label><br>
+			<input type="radio" id="show3" name="show3" value="show3">
+			<label for="vehicle3"> Hunger</label><br>
+			<input type="submit" value="submit" onClick="computeVisualization()" />
+		</form>
+	</div>
+</main>
+
+<p>Source: </p>
+<script type="text/javascript">
+	let data = sourcedata;
+	console.log(data);
+
+	const baselineInput = document.getElementById("baseline");
+	const AVG = 78.46;
+
+	function computeVisualization() {
+		ctx.clearRect(0, 0, width, height);
+		let mydata = {};
+		let baseline = baselineInput.value;
+		if (baseline == "") {
+			baseline = AVG;
+		}
+		
+
+		for (let obj of data) {
+			let country = obj.country;
+			let rate = obj.literacyRate;
+			mydata[country] = rate - baseline;
+			
+		}
+		console.log(mydata);
+
+		let myBarchart = new Barchart(
+		    {
+		        canvas:canvas,
+		        seriesName:"Hunger",
+		        padding:20,
+		        gridScale:10,
+		        gridColor:"#999",
+		        data:mydata,
+		        colors:["#333","#666", "#999","#CCC"],
+		        weirdPositiveStretch: 5
+		    }
+		);
+		myBarchart.draw();
+
+	}
+
+	
+	const canvas = document.getElementById("canvas");
+	const ctx = canvas.getContext('2d');
+
+	const width = canvas.width;
+	const height = canvas.height;
+	  
+
+	function drawLine(ctx, startX, startY, endX, endY,color){
+	    ctx.save();
+	    ctx.strokeStyle = color;
+	    ctx.beginPath();
+	    ctx.moveTo(startX,startY);
+	    ctx.lineTo(endX,endY);
+	    ctx.stroke();
+	    ctx.restore();
+	}
+
+	function drawBar(ctx, upperLeftCornerX, upperLeftCornerY, width, height,color){
+	    ctx.save();
+	    ctx.fillStyle=color;
+	    ctx.fillRect(upperLeftCornerX,upperLeftCornerY,width,height);
+	    ctx.restore();
+	}
+
+
+	let Barchart = function(options){
+	    this.options = options;
+	    this.canvas = options.canvas;
+	    this.ctx = this.canvas.getContext("2d");
+	    this.colors = options.colors;
+	    this.weirdStretch = options.weirdPositiveStretch;
+	 
+	    this.draw = function(){
+	        let maxValue = 0;
+	        let minValue = 0;
+	        for (let categ in this.options.data){
+	            maxValue = Math.max(maxValue,this.options.data[categ]);
+	        	minValue = Math.min(minValue, this.options.data[categ])
+	        }
+	        let canvasActualHeight = this.canvas.height - this.options.padding * 2;
+	        let canvasActualWidth = this.canvas.width - this.options.padding * 2;
+
+	        //drawing the grid lines
+	        let gridValue = Math.floor(minValue);
+	        while (gridValue <= maxValue){
+	        	let realValue = gridValue;
+	        	if (gridValue > 0) {
+	        		gridValue *= this.weirdStretch;
+	        	}
+	            let gridY = canvasActualHeight * (1 - (gridValue - minValue)/(this.weirdStretch * maxValue - minValue)) + this.options.padding;
+
+
+	            drawLine(
+	                this.ctx,
+	                0,
+	                gridY,
+	                this.canvas.width,
+	                gridY,
+	                this.options.gridColor
+	            );
+	            
+	            //writing grid markers
+	            this.ctx.save();
+	            this.ctx.fillStyle = this.options.gridColor;
+	            this.ctx.textBaseline="bottom"; 
+	            this.ctx.font = "bold 10px Arial";
+	            this.ctx.fillText(realValue, 10,gridY - 2);
+	            this.ctx.restore();
+
+	            gridValue+=this.options.gridScale;
+	        }      
+	 
+	        //drawing the bars
+	        let barIndex = 0;
+	        let numberOfBars = Object.keys(this.options.data).length;
+	        let barSize = (canvasActualWidth)/numberOfBars;
+
+	        for (categ in this.options.data){
+	            let val = this.options.data[categ];
+	            if (val > 0) {
+	            	val *= this.weirdStretch;
+	            }
+	            let barHeight = Math.round( canvasActualHeight * val/(this.weirdStretch * maxValue - minValue)) ;
+	            drawBar(
+	                this.ctx,
+	                this.options.padding + barIndex * barSize,
+	                this.canvas.height - barHeight - this.options.padding + (minValue / (this.weirdStretch * maxValue - minValue)) * canvasActualHeight,
+	                barSize,
+	                barHeight,
+	                this.colors[barIndex%this.colors.length]
+	            );
+
+	            //drawing series name
+		        this.ctx.save();
+		        this.ctx.rotate(-Math.PI/2);
+		        this.ctx.textBaseline="bottom";
+		        if (val >= 0) {
+		        	this.ctx.textAlign="right";
+		        }
+		        else {
+		        	this.ctx.textAlign="left";
+		        }
+		        
+		        this.ctx.fillStyle = "#000000";
+		        this.ctx.font = "normal 9px Arial";
+		        this.ctx.fillText(categ, (this.canvas.height - this.options.padding + (minValue / (this.weirdStretch * maxValue - minValue)) * canvasActualHeight) * -1, this.options.padding + (barIndex + 1) * barSize);  
+		        this.ctx.restore();  
+		        
+
+	            barIndex++;
+	        }
+
+	        //drawing series name
+	        this.ctx.save();
+	        this.ctx.textBaseline="bottom";
+	        this.ctx.textAlign="center";
+	        this.ctx.fillStyle = "#000000";
+	        this.ctx.font = "bold 14px Arial";
+	        this.ctx.fillText(this.options.seriesName, this.canvas.width/2,this.canvas.height);
+	        this.ctx.restore();  
+	        
+	        //draw legend
+	        barIndex = 0;
+	        let legend = document.querySelector("legend[for='myCanvas']");
+	        let ul = document.createElement("ul");
+	        legend.append(ul);
+	        for (categ in this.options.data){
+	            let li = document.createElement("li");
+	            li.style.listStyle = "none";
+	            li.style.borderLeft = "20px solid "+this.colors[barIndex%this.colors.length];
+	            li.style.padding = "5px";
+	            li.textContent = categ;
+	            ul.append(li);
+	            barIndex++;
+	        }
+	    }
+	}
+
+
+	
+</script>
+</body>
+</html>
