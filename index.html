@@ -2,6 +2,7 @@
 <html>
 <head>
 	<title></title>
+	<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 
 	<script type="text/javascript" src="./literacy-data.js"></script>
 	<style type="text/css">
@@ -15,38 +16,35 @@
 		#controls {
 			padding:10px;
 		}
-		canvas {
-			background: black;
-		}
+		
 	</style>
 </head>
 <body>
 	<h1>SNAP</h1>
-	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-	tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-	quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-	consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-	cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-	proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+	<p>SNAP Benefits reduce food insecurity by up to 30%. This is thousands of parents who are able to feed their children. This is thousands of elderly who are able 
+    to take their medication. Yet, food insecurity is still a major problem throughout the USA, despite what SNAP benefits do. So, we had to ask the question, What would happen
+    if SNAP Benefits did more? How many more people would be able to have dinner on their table? How many more people would be lifted 
+    from poverty? How many more people would survive?</p>
 
 <main>
-	<canvas width="800" height="480" id="canvas"></canvas>
+	<!-- <canvas width="800" height="480" id="canvas"></canvas> -->
+	<div id="chartContainer" style="height: 480px; width: 800px;"></div>
 	<div id="controls">
 		<h2>Controls</h2>
 		<form>
 			<input type="checkbox" id="expand1" name="expand1" value="expand1">
 			<label for="vehicle1"> Expand income to households with $X/year</label><br>
-			<input type="checkbox" id="expand2" name="expand2" value="expand1>
+			<input type="checkbox" id="expand2" name="expand2" value="expand1">
 			<label for="vehicle2"> Expand work to X</label><br>
 			<input type="checkbox" id="expand3" name="expand3" value="expand1">
 			<label for="vehicle3"> Cover basic hygeiene products</label><br>
 			<hr />
 			<h3>Show</h3>
-			<input type="radio" id="show1" name="show1" value="show1">
+			<input type="radio" id="show1" name="show" value="show1">
 			<label for="vehicle1"> Death rate</label><br>
-			<input type="radio" id="show2" name="show2" value="show2">
-			<label for="vehicle2"> Povery rate</label><br>
-			<input type="radio" id="show3" name="show3" value="show3">
+			<input type="radio" id="show2" name="show" value="show2">
+			<label for="vehicle2"> Poverty rate</label><br>
+			<input type="radio" id="show3" name="show" value="show3">
 			<label for="vehicle3"> Hunger</label><br>
 			<input type="submit" value="submit" onClick="computeVisualization()" />
 		</form>
@@ -54,7 +52,41 @@
 </main>
 
 <p>Source: </p>
-<script type="text/javascript">
+
+<script>
+window.onload = function () {
+
+var chart = new CanvasJS.Chart("chartContainer", {
+	animationEnabled: true,
+	theme: "light2",
+	title:{
+		text: "SNAP History"
+	},
+	data: [{        
+		type: "line",
+      	indexLabelFontSize: 16,
+		dataPoints: [
+			{ y: 450 },
+			{ y: 414},
+			{ y: 520, indexLabel: "Food Stamp Act Passed (1964)",markerColor: "red", markerType: "triangle" },
+			{ y: 460 },
+			{ y: 450 },
+			{ y: 500 },
+			{ y: 480 },
+			{ y: 480 },
+			{ y: 410 , indexLabel: "Budget cuts during Reagan administratation (1980)",markerColor: "DarkSlateGrey", markerType: "cross" },
+			{ y: 500 },
+			{ y: 480 },
+			{ y: 510 }
+		]
+	}]
+});
+chart.render();
+
+}
+</script>
+
+<!-- <script type="text/javascript">
 	let data = sourcedata;
 	console.log(data);
 
@@ -235,6 +267,6 @@
 
 
 	
-</script>
+</script> -->
 </body>
 </html>
