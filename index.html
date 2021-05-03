@@ -6,7 +6,23 @@
 
 	<script type="text/javascript" src="./literacy-data.js"></script>
 	<style type="text/css">
+		#landing {
+			display:flex;
+			justify-content: center;
+			align-items: center;
+			padding:5rem;
+			background-image: linear-gradient(to right, rgba(255,255,255,0.6), rgba(255,255,255,0.6)), url("images/food-header.webp");
+			background-attachment: fixed;
+		}
+		#landing img {
+			width:200px;
+			text-align:center;
+		}
+		#landing .landing-box {
+			
+		}
 		body {
+			margin:0;
 			background: white;
 			font-family:sans-serif;
 		}
@@ -14,14 +30,31 @@
 			display: flex;
 			width:100%;
 		}
+		.container {
+			padding:1rem 2rem;
+		}
 		#controls {
 			padding:10px;
+		}
+
+		.placeholder-graph {
+			background:#EEE;
+			width:100%;
+			height: 480px;
 		}
 		
 	</style>
 </head>
 <body>
-	<h1>SNAP</h1>
+	<div id="landing">
+		<div class="landing-box">
+			<img src="images/snap-logo.png" alt="SNAP logo">
+			<h1>Supplemental Nutrition Assistance Program (SNAP)</h1>
+			<h2>Lorem ipsum dolor sit amet, consectetur adipisicing elit</h2>
+		</div>
+	</div>
+	<div class="container">
+		<h2>About</h2>
 	<p>SNAP Benefits reduce food insecurity by up to 30%. This is thousands of parents who are able to feed their children. This is thousands of elderly who are able 
     to take their medication. Yet, food insecurity is still a major problem throughout the USA, despite what SNAP benefits do. So, we had to ask the question, What would happen
     if SNAP Benefits did more? How many more people would be able to have dinner on their table? How many more people would be lifted 
@@ -29,8 +62,22 @@
     <p>This model compares the Poverty Rates, Death Rates, and Hunger Rates of what is happening right now versus what could happen if 
     SNAP benefits were expanded in a variety of ways. Specifically, we look at expanding the upper limit for household income, expanding how 
     much SNAP covers, and expanding SNAP to cover basic hygieine products (which it currently does not).</p>
+	</div>
+	
+<div class="placeholder-graph">
+	</div>
 
+	<div class="container">
+		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+		proident, sunt in culpa qui officia deserunt mollit anim id est laborum.	
+	</p>
+	</div>
 <main>
+	
 	<!-- <canvas width="800" height="480" id="canvas"></canvas> -->
 	<div id="chartContainer" style="height: 480px; width: 800px;"></div>
 	<div id="controls">
