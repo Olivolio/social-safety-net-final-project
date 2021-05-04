@@ -11,7 +11,8 @@
 			justify-content: center;
 			align-items: center;
 			padding:5rem;
-			background-image: linear-gradient(to right, rgba(255,255,255,0.6), rgba(255,255,255,0.6)), url("images/food-header.webp");
+			text-align: center;
+			background-image: linear-gradient(to right, rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("images/food-header.webp");
 			background-attachment: fixed;
 		}
 		#landing img {
@@ -19,7 +20,7 @@
 			text-align:center;
 		}
 		#landing .landing-box {
-			
+			color:white;
 		}
 		body {
 			margin:0;
@@ -30,8 +31,13 @@
 			display: flex;
 			width:100%;
 		}
+		p {
+			line-height: 1.5em;
+		}
 		.container {
-			padding:1rem 2rem;
+			padding:3rem 1rem;
+			max-width:800px;
+			margin:0 auto;
 		}
 		#controls {
 			padding:10px;
@@ -41,6 +47,28 @@
 			background:#EEE;
 			width:100%;
 			height: 480px;
+			margin:2rem 0;
+		}
+
+		table {
+			border-collapse: collapse;
+			width: 100%;
+		}
+		tr {
+			border-bottom: 1px solid #EEE;
+		}
+		tr:first-child {
+			border-bottom: 2px solid #CCC;
+		}
+		td, th {
+			padding: 0.5rem 1rem;
+			text-align: left;
+		}
+
+		.controls {
+			background:white;
+			border: 1px solid #EEE;
+			padding:1rem;
 		}
 		
 	</style>
@@ -48,7 +76,6 @@
 <body>
 	<div id="landing">
 		<div class="landing-box">
-			<img src="images/snap-logo.png" alt="SNAP logo">
 			<h1>Supplemental Nutrition Assistance Program (SNAP)</h1>
 			<h2>Lorem ipsum dolor sit amet, consectetur adipisicing elit</h2>
 		</div>
@@ -62,9 +89,27 @@
     <p>This model compares the Poverty Rates, Death Rates, and Hunger Rates of what is happening right now versus what could happen if 
     SNAP benefits were expanded in a variety of ways. Specifically, we look at expanding the upper limit for household income, expanding how 
     much SNAP covers, and expanding SNAP to cover basic hygieine products (which it currently does not).</p>
-	</div>
 	
-<div class="placeholder-graph">
+	<div class="placeholder-graph">
+		<div class="controls">
+			<h4>Controls</h4>
+			<form>
+			<div>
+			<label for="threshold">Threshold</label><br>
+			<input type="range" id="threshold" name="threshold" min="1.0" max="2" value="1.0" step="0.3">
+			<span id="bubble">1.0</span>
+			</div>
+			<div>
+				<label for="bound">Choose a estimation bound:</label>
+				<select id="bound" name="bound">
+				  <option value="lower">Lower bound</option>
+				  <option value="average">Average</option>
+				  <option value="upper">Upper bound</option>
+				</select>
+			</div>
+			</form>
+		</div>
+	</div>
 	</div>
 
 	<div class="container">
@@ -76,249 +121,67 @@
 		proident, sunt in culpa qui officia deserunt mollit anim id est laborum.	
 	</p>
 	</div>
-<main>
-	
-	<!-- <canvas width="800" height="480" id="canvas"></canvas> -->
-	<div id="chartContainer" style="height: 480px; width: 800px;"></div>
-	<div id="controls">
-		<h2>Controls</h2>
-		<form>
-			<h3>Change</h3>
-			<input type="checkbox" id="expand1" name="expand1" value="expand1">
-			<label for="vehicle1"> Expand income to households with $X/year</label><br>
-			<input type="checkbox" id="expand2" name="expand2" value="expand1">
-			<label for="vehicle2"> Expand work to X</label><br>
-			<input type="checkbox" id="expand3" name="expand3" value="expand1">
-			<label for="vehicle3"> Cover basic hygeiene products</label><br>
-			<hr />
-			<h3>Show</h3>
-			<input type="radio" id="show1" name="show" value="show1">
-			<label for="vehicle1"> Death rate</label><br>
-			<input type="radio" id="show2" name="show" value="show2">
-			<label for="vehicle2"> Poverty rate</label><br>
-			<input type="radio" id="show3" name="show" value="show3">
-			<label for="vehicle3"> Hunger</label><br>
-			<input type="submit" value="submit" onClick="computeVisualization()" />
-		</form>
+<div class="container">
+	<h2>Threshold vs. Eligibility</h2>
+	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+	tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+	quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+	consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+	cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+	proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+	<div class="placeholder-graph">
 	</div>
-</main>
+<table>
+	<tr>
+		<th>Columns</th>
+		<th>Columns</th>
+		<th>Columns</th>
+	</tr>
+	<tr>
+		<td>Columns</td>
+		<td>Columns</td>
+		<td>Columns</td>
+	</tr>
+	<tr>
+		<td>Columns</td>
+		<td>Columns</td>
+		<td>Columns</td>
+	</tr>
+	<tr>
+		<td>Columns</td>
+		<td>Columns</td>
+		<td>Columns</td>
+	</tr>
+</table>
+
+</div>
+
+<div class="container">
+	<h2>Hunger</h2>
+	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+	tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+	quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+	consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+	cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+	proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+	<div class="placeholder-graph">
+	</div>
+</div>
+
+
+
+
+
 
 <p>Source: </p>
-
-<script>
-window.onload = function () {
-
-var chart = new CanvasJS.Chart("chartContainer", {
-	animationEnabled: true,
-	theme: "light2",
-	title:{
-		text: "SNAP History"
-	},
-	data: [{        
-		type: "line",
-      	indexLabelFontSize: 16,
-		dataPoints: [
-			{ y: 50 },
-			{ y: 14},
-			{ y: 20, indexLabel: "Food Stamp Act Passed (1964)",markerColor: "red", markerType: "triangle" },
-			{ y: 60 },
-			{ y: 50 },
-			{ y: 40 },
-			{ y: 80 },
-			{ y: 80 },
-			{ y: 10 , indexLabel: "Budget cuts during Reagan administratation (1980)",markerColor: "DarkSlateGrey", markerType: "cross" },
-			{ y: 40 },
-			{ y: 80 },
-			{ y: 10 }
-		]
-	}]
+<script type="text/javascript">
+	
+const thresholdrange = document.getElementById("threshold");
+const bubble = document.getElementById("bubble");
+thresholdrange.addEventListener("input", () => {
+  bubble.innerHTML = thresholdrange.value;
 });
-chart.render();
 
-}
 </script>
-
-<!-- <script type="text/javascript">
-	let data = sourcedata;
-	console.log(data);
-
-	const baselineInput = document.getElementById("baseline");
-	const AVG = 78.46;
-
-	function computeVisualization() {
-		ctx.clearRect(0, 0, width, height);
-		let mydata = {};
-		let baseline = baselineInput.value;
-		if (baseline == "") {
-			baseline = AVG;
-		}
-		
-
-		for (let obj of data) {
-			let country = obj.country;
-			let rate = obj.literacyRate;
-			mydata[country] = rate - baseline;
-			
-		}
-		console.log(mydata);
-
-		let myBarchart = new Barchart(
-		    {
-		        canvas:canvas,
-		        seriesName:"Hunger",
-		        padding:20,
-		        gridScale:10,
-		        gridColor:"#999",
-		        data:mydata,
-		        colors:["#333","#666", "#999","#CCC"],
-		        weirdPositiveStretch: 5
-		    }
-		);
-		myBarchart.draw();
-
-	}
-
-	
-	const canvas = document.getElementById("canvas");
-	const ctx = canvas.getContext('2d');
-
-	const width = canvas.width;
-	const height = canvas.height;
-	  
-
-	function drawLine(ctx, startX, startY, endX, endY,color){
-	    ctx.save();
-	    ctx.strokeStyle = color;
-	    ctx.beginPath();
-	    ctx.moveTo(startX,startY);
-	    ctx.lineTo(endX,endY);
-	    ctx.stroke();
-	    ctx.restore();
-	}
-
-	function drawBar(ctx, upperLeftCornerX, upperLeftCornerY, width, height,color){
-	    ctx.save();
-	    ctx.fillStyle=color;
-	    ctx.fillRect(upperLeftCornerX,upperLeftCornerY,width,height);
-	    ctx.restore();
-	}
-
-
-	let Barchart = function(options){
-	    this.options = options;
-	    this.canvas = options.canvas;
-	    this.ctx = this.canvas.getContext("2d");
-	    this.colors = options.colors;
-	    this.weirdStretch = options.weirdPositiveStretch;
-	 
-	    this.draw = function(){
-	        let maxValue = 0;
-	        let minValue = 0;
-	        for (let categ in this.options.data){
-	            maxValue = Math.max(maxValue,this.options.data[categ]);
-	        	minValue = Math.min(minValue, this.options.data[categ])
-	        }
-	        let canvasActualHeight = this.canvas.height - this.options.padding * 2;
-	        let canvasActualWidth = this.canvas.width - this.options.padding * 2;
-
-	        //drawing the grid lines
-	        let gridValue = Math.floor(minValue);
-	        while (gridValue <= maxValue){
-	        	let realValue = gridValue;
-	        	if (gridValue > 0) {
-	        		gridValue *= this.weirdStretch;
-	        	}
-	            let gridY = canvasActualHeight * (1 - (gridValue - minValue)/(this.weirdStretch * maxValue - minValue)) + this.options.padding;
-
-
-	            drawLine(
-	                this.ctx,
-	                0,
-	                gridY,
-	                this.canvas.width,
-	                gridY,
-	                this.options.gridColor
-	            );
-	            
-	            //writing grid markers
-	            this.ctx.save();
-	            this.ctx.fillStyle = this.options.gridColor;
-	            this.ctx.textBaseline="bottom"; 
-	            this.ctx.font = "bold 10px Arial";
-	            this.ctx.fillText(realValue, 10,gridY - 2);
-	            this.ctx.restore();
-
-	            gridValue+=this.options.gridScale;
-	        }      
-	 
-	        //drawing the bars
-	        let barIndex = 0;
-	        let numberOfBars = Object.keys(this.options.data).length;
-	        let barSize = (canvasActualWidth)/numberOfBars;
-
-	        for (categ in this.options.data){
-	            let val = this.options.data[categ];
-	            if (val > 0) {
-	            	val *= this.weirdStretch;
-	            }
-	            let barHeight = Math.round( canvasActualHeight * val/(this.weirdStretch * maxValue - minValue)) ;
-	            drawBar(
-	                this.ctx,
-	                this.options.padding + barIndex * barSize,
-	                this.canvas.height - barHeight - this.options.padding + (minValue / (this.weirdStretch * maxValue - minValue)) * canvasActualHeight,
-	                barSize,
-	                barHeight,
-	                this.colors[barIndex%this.colors.length]
-	            );
-
-	            //drawing series name
-		        this.ctx.save();
-		        this.ctx.rotate(-Math.PI/2);
-		        this.ctx.textBaseline="bottom";
-		        if (val >= 0) {
-		        	this.ctx.textAlign="right";
-		        }
-		        else {
-		        	this.ctx.textAlign="left";
-		        }
-		        
-		        this.ctx.fillStyle = "#000000";
-		        this.ctx.font = "normal 9px Arial";
-		        this.ctx.fillText(categ, (this.canvas.height - this.options.padding + (minValue / (this.weirdStretch * maxValue - minValue)) * canvasActualHeight) * -1, this.options.padding + (barIndex + 1) * barSize);  
-		        this.ctx.restore();  
-		        
-
-	            barIndex++;
-	        }
-
-	        //drawing series name
-	        this.ctx.save();
-	        this.ctx.textBaseline="bottom";
-	        this.ctx.textAlign="center";
-	        this.ctx.fillStyle = "#000000";
-	        this.ctx.font = "bold 14px Arial";
-	        this.ctx.fillText(this.options.seriesName, this.canvas.width/2,this.canvas.height);
-	        this.ctx.restore();  
-	        
-	        //draw legend
-	        barIndex = 0;
-	        let legend = document.querySelector("legend[for='myCanvas']");
-	        let ul = document.createElement("ul");
-	        legend.append(ul);
-	        for (categ in this.options.data){
-	            let li = document.createElement("li");
-	            li.style.listStyle = "none";
-	            li.style.borderLeft = "20px solid "+this.colors[barIndex%this.colors.length];
-	            li.style.padding = "5px";
-	            li.textContent = categ;
-	            ul.append(li);
-	            barIndex++;
-	        }
-	    }
-	}
-
-
-	
-</script> -->
 </body>
 </html>
