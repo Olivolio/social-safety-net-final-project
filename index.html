@@ -7,20 +7,15 @@
 	<script type="text/javascript" src="./literacy-data.js"></script>
 	<style type="text/css">
 		#landing {
-			display:flex;
-			justify-content: center;
-			align-items: center;
-			padding:5rem;
-			text-align: center;
-			background-image: linear-gradient(to right, rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("images/food-header.webp");
+			padding:5rem 1rem;
+			background-image: linear-gradient(to right, rgba(47,181,106,0.5), rgba(47,181,106,0.5)), url("images/food-header.webp");
 			background-attachment: fixed;
-		}
-		#landing img {
-			width:200px;
-			text-align:center;
+			background-size: cover;
 		}
 		#landing .landing-box {
 			color:white;
+			max-width: 800px;
+			margin:auto;
 		}
 		body {
 			margin:0;
@@ -70,6 +65,27 @@
 			border: 1px solid #EEE;
 			padding:1rem;
 		}
+		.controls h4 {
+			margin:0.5rem 0;
+		}
+
+		.controls form {
+		}
+		.controls form > div {
+			padding:0.5rem 0;
+		}
+		.controls input, .controls select {
+			width:100%;
+		}
+		.controls span {
+			text-align:right;
+			width:30px;
+		}
+		.controls .range-bubble {
+			width:100%;
+			display: flex;
+			justify-content: space-between;
+		}
 		
 	</style>
 </head>
@@ -93,20 +109,29 @@
 	<div class="placeholder-graph">
 		<div class="controls">
 			<h4>Controls</h4>
-			<form>
+			<form id="intro">
 			<div>
 			<label for="threshold">Threshold</label><br>
+			<div class="range-bubble">
 			<input type="range" id="threshold" name="threshold" min="1.0" max="2" value="1.0" step="0.3">
-			<span id="bubble">1.0</span>
+			<span id="threshold-bubble">1.0</span>
+		</div>
 			</div>
 			<div>
-				<label for="bound">Choose a estimation bound:</label>
+				<label for="bound">Choose a estimation bound:</label><br>
 				<select id="bound" name="bound">
 				  <option value="lower">Lower bound</option>
 				  <option value="average">Average</option>
 				  <option value="upper">Upper bound</option>
 				</select>
 			</div>
+			<div>
+				<label for="years">Number of years to model:</label><br>
+				<div class="range-bubble">
+				<input type="range" id="years" name="years" min="5" max="40" value="10" step="5">
+			<span id="years-bubble">10</span></div>
+			</div>
+			<button onClick="return handleForm(0)">Submit</button>
 			</form>
 		</div>
 	</div>
@@ -165,6 +190,33 @@
 	cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
 	proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 	<div class="placeholder-graph">
+		<div class="controls">
+			<h4>Controls</h4>
+			<form id="hunger">
+			<div>
+			<label for="threshold">Threshold</label><br>
+			<div class="range-bubble">
+			<input type="range" id="threshold" name="threshold" min="1.0" max="2" value="1.0" step="0.3">
+			<span id="threshold-bubble">1.0</span>
+		</div>
+			</div>
+			<div>
+				<label for="bound">Choose a estimation bound:</label><br>
+				<select id="bound" name="bound">
+				  <option value="lower">Lower bound</option>
+				  <option value="average">Average</option>
+				  <option value="upper">Upper bound</option>
+				</select>
+			</div>
+			<div>
+				<label for="years">Number of years to model:</label><br>
+				<div class="range-bubble">
+				<input type="range" id="years" name="years" min="5" max="40" value="10" step="5">
+			<span id="years-bubble">10</span></div>
+			</div>
+			<button onClick="return handleForm(1)">Submit</button>
+			</form>
+		</div>
 	</div>
 </div>
 
@@ -177,10 +229,21 @@
 <script type="text/javascript">
 	
 const thresholdrange = document.getElementById("threshold");
-const bubble = document.getElementById("bubble");
+const tbubble = document.getElementById("threshold-bubble");
 thresholdrange.addEventListener("input", () => {
-  bubble.innerHTML = thresholdrange.value;
+  tbubble.innerHTML = thresholdrange.value;
 });
+
+const yearsrange = document.getElementById("years");
+const ybubble = document.getElementById("years-bubble");
+yearsrange.addEventListener("input", () => {
+  ybubble.innerHTML = yearsrange.value;
+});
+
+function handleForm(formID) {
+	console.log(formID);
+	return false;
+}
 
 </script>
 </body>
