@@ -31,7 +31,7 @@
 		}
 		.container {
 			padding:3rem 1rem;
-			max-width:800px;
+			width:800px;
 			margin:0 auto;
 		}
 		#controls {
@@ -44,10 +44,6 @@
 			margin:2rem 0;
 		}
 
-		.placeholder-graph canvas {
-			width: 600px;
-			height: 480px;
-		}
 
 		table {
 			border-collapse: collapse;
@@ -73,9 +69,9 @@
 			margin:0.5rem 0;
 		}
 
-		.controls form {
+		.controls div {
 		}
-		.controls form > div {
+		.controls div > div {
 			padding:0.5rem 0;
 		}
 		.controls input, .controls select {
@@ -113,17 +109,17 @@
 	<div class="placeholder-graph">
 		<div class="controls">
 			<h4>Controls</h4>
-			<form id="intro">
+			<div id="form-0">
 			<div>
 			<label for="threshold">Threshold</label><br>
 			<div class="range-bubble">
-			<input type="range" id="threshold" name="threshold" min="1.0" max="2" value="1.0" step="0.3">
-			<span id="threshold-bubble">1.0</span>
+			<input type="range" name="threshold" min="1.0" max="2" value="1.0" step="0.3">
+			<span>1.0</span>
 		</div>
 			</div>
 			<div>
 				<label for="bound">Choose a estimation bound:</label><br>
-				<select id="bound" name="bound">
+				<select name="bound">
 				  <option value="lower">Lower bound</option>
 				  <option value="average">Average</option>
 				  <option value="upper">Upper bound</option>
@@ -132,14 +128,14 @@
 			<div>
 				<label for="years">Number of years to model:</label><br>
 				<div class="range-bubble">
-				<input type="range" id="years" name="years" min="5" max="40" value="10" step="5">
-			<span id="years-bubble">10</span></div>
+				<input type="range" name="years" min="5" max="40" value="10" step="5">
+			<span>10</span></div>
 			</div>
-			<button onClick="return handleForm(0)">Submit</button>
-			</form>
+			<button class="submit">Submit</button>
+			</div>
 		</div>
 
-		<canvas id="intro-canvas" width="600" height="480"></canvas>
+		<canvas id="canvas-0" width="800" height="600"></canvas>
 	</div>
 	</div>
 
@@ -198,17 +194,17 @@
 	<div class="placeholder-graph">
 		<div class="controls">
 			<h4>Controls</h4>
-			<form id="hunger">
+			<div id="form-1">
 			<div>
 			<label for="threshold">Threshold</label><br>
 			<div class="range-bubble">
-			<input type="range" id="threshold" name="threshold" min="1.0" max="2" value="1.0" step="0.3">
-			<span id="threshold-bubble">1.0</span>
+			<input type="range" name="threshold" min="1.0" max="2" value="1.0" step="0.3">
+			<span>1.0</span>
 		</div>
 			</div>
 			<div>
 				<label for="bound">Choose a estimation bound:</label><br>
-				<select id="bound" name="bound">
+				<select name="bound">
 				  <option value="lower">Lower bound</option>
 				  <option value="average">Average</option>
 				  <option value="upper">Upper bound</option>
@@ -217,12 +213,13 @@
 			<div>
 				<label for="years">Number of years to model:</label><br>
 				<div class="range-bubble">
-				<input type="range" id="years" name="years" min="5" max="40" value="10" step="5">
-			<span id="years-bubble">10</span></div>
+				<input type="range" name="years" min="5" max="40" value="10" step="5">
+			<span>10</span></div>
 			</div>
-			<button onClick="return handleForm(1)">Submit</button>
-			</form>
+			<button class="submit">Submit</button>
+			</div>
 		</div>
+		<canvas id="canvas-1" width="800" height="600"></canvas>
 	</div>
 </div>
 
@@ -235,26 +232,43 @@
 <script type="module">
 	import{drawGraph} from "./Graph.mjs";
 	import{years, pop} from "./2Graphs.mjs";
- 
-	
-const thresholdrange = document.getElementById("threshold");
-const tbubble = document.getElementById("threshold-bubble");
-thresholdrange.addEventListener("input", () => {
-  tbubble.innerHTML = thresholdrange.value;
-});
 
-const yearsrange = document.getElementById("years");
-const ybubble = document.getElementById("years-bubble");
-yearsrange.addEventListener("input", () => {
-  ybubble.innerHTML = yearsrange.value;
-});
 
-function handleForm(formID) {
-	console.log(formID);
-	return false;
-}
+	// Add value labels to all ranges
+	const allRanges = document.querySelectorAll(".range-bubble");
+	allRanges.forEach(element => {
+		let range = element.children[0];
+		let bubble = element.children[1];
+		range.addEventListener("input", () => {
+		  bubble.innerHTML = range.value;
+		});
+	}
+	);
 
-console.log(years);
+	const allSubmitButtons = document.querySelectorAll(".submit");
+	for (let i = 0; i < allSubmitButtons.length; i++) {
+		let but = allSubmitButtons[i];
+		let form = document.getElementById("form-" + i);
+		but.addEventListener("click", function(e) {
+			handleForm(i);
+		});
+	}
+
+	function handleForm(formID) {
+		console.log(formID);
+		const form = document.getElementById("form-" + formID);
+		console.log(form);
+		console.log(document.getElementById("canvas-" + formID));
+
+		const threshold = form.querySelector('input[name="threshold"]').value;
+		const bound = form.querySelector('select[name="bound"]').value;
+		const years = form.querySelector('input[name="years"]').value;
+		console.log(threshold + " " + bound + " " + years)
+		drawGraph("canvas-" + formID, years, pop, repeat, repeat);
+
+		return false;
+	}
+
 function repeat(pop) {
 	return pop + 1;
 }
