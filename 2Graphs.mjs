@@ -1,10 +1,5 @@
+//Does this do stuff?
 import{drawGraph} from "./Graph.mjs";
-
-
-export const years = [2020,2021,2022,2023,2024,2025,2026,2027,2028,2029,2030,2031,2032,2033,2034,2035,2036,2037,2038,2039,2040,2041,2042,2043,2044,2045,2046,2047,2048,2049,2050,2051,2052,2053,2054,2055,2056,2057,2058,2059,2060];
-
-export const pop = [332639,334998,337342,339665,341963,344234,346481,348695,350872,353008,355101,357147,359147,361099,363003,364862,366676,368448,370179,371871,373528,375152,376746,378314,379861,381390,382907,384415,385918,387419,388922,390431,391947,393473,395009,396557,398118,399691,401277,402874,404483];
-
 
 const numH1 = 11194;
 const numH13 = 4664;
@@ -33,9 +28,9 @@ const percInsE = numHIE/numHE;
 
 const percI = numHI/numH;
 
-export function drawFoodInsecurity(gID,which, howMuch){
+export function drawFoodInsecurity(gID,which, howMuch, howlong){
     
-    /*
+    
     function insecure1(pop){
         const old = pop*perI;
         var new1 = pop*percOfPop1*percIns1*howMuch;
@@ -64,12 +59,12 @@ export function drawFoodInsecurity(gID,which, howMuch){
     }
     
     if(which == 1.85){
-        drawGraph(gID, years, pop, insecure13,insecure185);
+        drawGraph(gID, howlong, insecure13,insecure185);
     }
     if(which == 100){
-        drawGraph(gID, years, pop, insecure13,insecureE);
+        drawGraph(gID, howlong, insecure13,insecureE);
     }
     if(which == 1){
-        drawGraph(gID, years, pop, insecure13, insecure1);
-    }*/
+        drawGraph(gID, howlong, insecure13, insecure1);
+    }
 }
