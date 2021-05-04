@@ -1,5 +1,13 @@
+export const years = [2020,2021,2022,2023,2024,2025,2026,2027,2028,2029,2030,2031,2032,2033,2034,2035,2036,2037,2038,2039,2040,2041,2042,2043,2044,2045,2046,2047,2048,2049,2050,2051,2052,2053,2054,2055,2056,2057,2058,2059,2060];
 
-export function drawGraph(gID, years,yearPopData, Eqn1, Eqn2){
+export const yearPopData = [332639,334998,337342,339665,341963,344234,346481,348695,350872,353008,355101,357147,359147,361099,363003,364862,366676,368448,370179,371871,373528,375152,376746,378314,379861,381390,382907,384415,385918,387419,388922,390431,391947,393473,395009,396557,398118,399691,401277,402874,404483];
+
+
+
+export function drawGraph(gID, howLong, Eqn1, Eqn2){
+
+    howLong += 1;
+    
     const canvas = document.getElementById(gID);
     const ctx = canvas.getContext("2d");
     
@@ -12,11 +20,11 @@ export function drawGraph(gID, years,yearPopData, Eqn1, Eqn2){
     const widthFromLeft = 75;
     
     
-    const distBetweenDots = (width-widthFromLeft*2)/(yearPopData.length-1);
+    const distBetweenDots = (width-widthFromLeft*2)/(howLong-1);
     
     var max = 0;
     
-    for (var i = 0; i < yearPopData.length; i++){
+    for (var i = 0; i < howLong; i++){
         if (max < Eqn1(yearPopData[i])){
             max = Eqn1(yearPopData[i]);
         }
@@ -38,12 +46,11 @@ export function drawGraph(gID, years,yearPopData, Eqn1, Eqn2){
     ctx.lineTo(widthFromLeft + width-2*widthFromLeft, distFromTop + maxHeight);
     ctx.stroke();
     
-    for (var i = 1; i < yearPopData.length; i++){
+    for (var i = 1; i < howLong; i++){
       drawLine(widthFromLeft + (i-1)*distBetweenDots, i)  
     }
     
     // Draw the stuff for the first dot
-    ctx.fillText(years[0], widthFromLeft, distFromTop + maxHeight + 20)
     //Draw a little circle on the data point
     ctx.fillStyle = "#000000";
     ctx.beginPath();
@@ -76,17 +83,6 @@ export function drawGraph(gID, years,yearPopData, Eqn1, Eqn2){
         ctx.lineTo(start+distBetweenDots, height - distFromBottom - barHeightNew);
         ctx.stroke();
         
-        // Draw the faded background lines
-        ctx.strokeStyle = "#D3D3D3";
-        ctx.beginPath();
-        ctx.moveTo(start + distBetweenDots, height - distFromBottom);
-        ctx.lineTo(start + distBetweenDots, distFromTop);
-        ctx.stroke();
-        
-        // Add date on x axis
-        ctx.font = "12px serif";
-        ctx.fillStyle = "#000000"
-        ctx.fillText(years[index], widthFromLeft + index*distBetweenDots - 5, distFromTop + maxHeight + 20);
     }
     
     
@@ -99,14 +95,15 @@ export function drawGraph(gID, years,yearPopData, Eqn1, Eqn2){
     
     
     
-    for (var i = 1; i < yearPopData.length; i++){
+    for (var i = 1; i < howLong; i++){
       drawLine2(widthFromLeft + (i-1)*distBetweenDots, i)  
     }
     
+    ctx.fillStyle = "black";
     // Draw the stuff for the first dot
     ctx.fillText(years[0], widthFromLeft, distFromTop + maxHeight + 20)
     //Draw a little circle on the data point
-    ctx.fillStyle = "#000000";
+    ctx.fillStyle = "#8B0000";
     ctx.beginPath();
     ctx.arc(widthFromLeft, maxHeight-(Eqn2(yearPopData[0])/max*maxHeight) + distFromTop,3, 0, 2*Math.PI);
     ctx.fill();
@@ -137,17 +134,21 @@ export function drawGraph(gID, years,yearPopData, Eqn1, Eqn2){
         ctx.lineTo(start+distBetweenDots, height - distFromBottom - barHeightNew);
         ctx.stroke();
         
-        // Draw the faded background lines
-        ctx.strokeStyle = "#D3D3D3";
-        ctx.beginPath();
-        ctx.moveTo(start + distBetweenDots, height - distFromBottom);
-        ctx.lineTo(start + distBetweenDots, distFromTop);
-        ctx.stroke();
+        // Only do these every 5 years if 20 or more years are in the data
         
-        // Add date on x axis
-        ctx.font = "12px serif";
-        ctx.fillStyle = "#000000"
-        ctx.fillText(years[index], widthFromLeft + index*distBetweenDots - 5, distFromTop + maxHeight + 20);
+        if(howLong < 20 || index%5 == 0){
+            // Draw the faded background lines
+            ctx.strokeStyle = "#D3D3D3";
+            ctx.beginPath();
+            ctx.moveTo(start + distBetweenDots, height - distFromBottom);
+            ctx.lineTo(start + distBetweenDots, distFromTop);
+            ctx.stroke();
+        
+            // Add date on x axis
+            ctx.font = "12px serif";
+            ctx.fillStyle = "#000000"
+            ctx.fillText(years[index], widthFromLeft + index*distBetweenDots - 5, distFromTop + maxHeight + 20);
+        }
     }
     
     
@@ -178,7 +179,7 @@ export function drawGraph(gID, years,yearPopData, Eqn1, Eqn2){
         ctx.textAlign = "right";
         ctx.font = "12px serif";
         ctx.fillStyle = "#000000"
-        ctx.fillText(parts*i, widthFromLeft - 5, h+8);
+        ctx.fillText((parts*i).toLocaleString(), widthFromLeft - 5, h+8);
         h = h- 50;
         i++;
         
