@@ -7,19 +7,25 @@ const numHE = 70137;
 
 const qualifyPercent = (numH1 + numH13) / (numH1 + numH13 + numH185 + numHE);
 
+const lowincomePercent = (numH1 + numH13 + numH185) / (numH1 + numH13 + numH185 + numHE);
+
 function hcs1(pop) {
-	let lowincome = pop * qualifyPercent;
-	return (lowincome * 0.2 * 5831) + (lowincome * 0.8 * 4421);
+	let qual = pop * qualifyPercent;
+	let all = pop * lowincomePercent;
+	return (qual * 0.2 * 5831) + (qual * 0.8 * 4421) + (all - qual) * 5831;
 }
 
 function hsc2(threshold, bound, years, pop) {
-	let lowincome = pop * qualifyPercent
+	let lowincome = pop * lowincomePercent;
 	let using = 0;
 	if (threshold <= 1.0) {
 		using = 0.8 * numH1;
 	}
+	else if (threshold <= 1.3) {
+		using = 0.8 * numH1 + 0.8 * numH13;
+	}
 	else {
-		using = 0.8 * lowincome;
+		using = 0.8 * numH1 + 0.8 * numH13 + 0.8 * numH185;
 	}
 	let notusing = lowincome - using;
 	let spending = 0;

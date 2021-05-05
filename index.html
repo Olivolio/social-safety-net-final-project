@@ -37,7 +37,6 @@
 		}
 
 		.placeholder-graph {
-			background:#EEE;
 			width:100%;
 			margin:2rem 0;
 		}
@@ -229,6 +228,17 @@
 		<div class="controls">
 			<h4>Controls</h4>
 			<div id="form-2">
+				<div>
+                
+            <label for="threshold">Choose a threshold:</label><br>
+
+            <select name="threshold">
+                    <option value="1.0">1.0</option>
+                    <option value="1.3">1.3</option>
+                    <option value="1.85">1.85</option>
+                    <option value="Everyone">Everyone</option>
+            </select>
+            <div>
 			<div>
 				<label for="years">Number of years to model:</label><br>
 				<div class="range-bubble">
@@ -240,10 +250,95 @@
 		</div>
 		<canvas id="canvas-2" width="800" height="600"></canvas>
 	</div>
+</div>  
+</div>  
+
+<div class="container">
+	<h2>Mortality</h2>
+	<p></p>
+	<div class="placeholder-graph">
+		<div class="controls">
+			<h4>Controls</h4>
+			<div id="form-3">
+				<div>
+                
+            <label for="threshold">Choose a threshold:</label><br>
+
+            <select name="threshold">
+                    <option value="1.0">1.0</option>
+                    <option value="1.3">1.3</option>
+                    <option value="1.85">1.85</option>
+                    <option value="Everyone">Everyone</option>
+            </select>
+        </div>
+        <div>
+				<label for="bound">Choose a estimation bound:</label>
+				<select name="bound">
+				  <option value="lower">Lower bound</option>
+				  <option value="average">Average</option>
+				  <option value="upper">Upper bound</option>
+				</select>
+			</div>
+            
+			<div>
+				<label for="years">Number of years to model:</label><br>
+				<div class="range-bubble">
+				<input type="range" name="years" min="5" max="40" value="10" step="5">
+			<span>10</span></div>
+			</div>
+			<button class="submit">Submit</button>
+			</div>
+		</div>
+		<h3>Mortality rate per 100k people per year</h3>
+		<canvas id="canvas-3" width="800" height="600"></canvas>
+	</div>
+</div>   
+</div> 
+
+
+<div class="container">
+	<h2>Healthcare Spending</h2>
+	<p></p>
+	<div class="placeholder-graph">
+		<div class="controls">
+			<h4>Controls</h4>
+			<div id="form-4">
+				<div>
+                
+            <label for="threshold">Choose a threshold:</label><br>
+
+            <select name="threshold">
+                    <option value="1.0">1.0</option>
+                    <option value="1.3">1.3</option>
+                    <option value="1.85">1.85</option>
+            </select>
+
+            </div>
+            <div>
+				<label for="bound">Choose a estimation bound:</label>
+				<select name="bound">
+				  <option value="lower">Lower bound</option>
+				  <option value="average">Average</option>
+				  <option value="upper">Upper bound</option>
+				</select>
+			</div>
+			<div>
+				<label for="years">Number of years to model:</label><br>
+				<div class="range-bubble">
+				<input type="range" name="years" min="5" max="40" value="10" step="5">
+			<span>10</span></div>
+			</div>
+			<button class="submit">Submit</button>
+			</div>
+		</div>
+		<h3>Healthcare Spending per 100k low income people per year</h3>
+		<canvas id="canvas-4" width="800" height="600"></canvas>
+	</div>
 </div>    
+</div>
 
 
-<div style="padding: 2rem">
+<div class="container">
     <h2>The Cost</h2>
     <p>SNAP is the most important anti-hunger program in the USA. However, the benefits are surprisingly small. The average SNAP recipient receives about $127 a month, which is $4.17 a day or $1.39 per meal. Because SNAP helped nearly 38 Million people in 2019, SNAP still cost the federal government 63.5 Billion.</p>
     <p>That is only $1,671 per recipient in 2019, or $443 dollars per taxpayer. For reference, the cost for a year of SNAP is about 8.6% of the US's military budget.</p>
@@ -251,7 +346,7 @@
     <p>Given this, it is estimated that moving the SNAP Cap to 185% of the poverty line would increase the cost of the whole SNAP program by at most 1/3.</p>
 </div>
 
-<div style ="padding:1rem">
+<div class="container">
 <h3>Source: </h3>
     <a href="https://www.fns.usda.gov/pd/supplemental-nutrition-assistance-program-snap">General SNAP Information</a><br>
     <a href = "https://www.fns.usda.gov/pd/supplemental-nutrition-assistance-program-snap">Participation and Cost</a><br>
@@ -266,7 +361,8 @@
 </div>
 <script type="module">
 	import{drawGraph} from "./Graph.mjs";
-	import{mortality1, mortality2} from "./Equations.mjs";
+	import{drawHealthcareSpendingGraph} from "./HealthcareSpendingGraph.mjs";
+	import{drawMortalityGraph} from "./MortalityGraph.mjs";
     import{drawFoodInsecurity} from "./FoodInsecurityGraph.mjs";
     import{drawPovertyGraph} from "./PovertyGraph.mjs";
 
@@ -322,6 +418,13 @@
             }
             drawFoodInsecurity("canvas-1",threshold,howMuch,years);
         }
+
+        else if (formID == 3) {
+        	drawMortalityGraph(formID, threshold, bound, years);
+        }
+        else if (formID == 4) {
+        	drawHealthcareSpendingGraph(formID, threshold, bound, years);
+        }
 		
 		//drawGraph("canvas-" + formID, years, eq1, eq2);
 
@@ -334,6 +437,8 @@ function repeat(pop) {
     
 handleForm(1);
 handleForm(2);
+handleForm(3);
+handleForm(4);
 </script>
 </body>
 </html>
