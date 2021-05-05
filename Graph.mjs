@@ -196,9 +196,10 @@ export function drawGraph(gID, howLong, Eqn1, Eqn2){
     //ctx.translate(100,300);
     ctx.rotate(-0.5*Math.PI);
 
-    var rText = 'Rotated Text';
-    ctx.fillText("Number of People (In Thousands)" , -height*5/8, widthFromLeft/4);
+    ctx.fillText("Number of People (In Thousands)" , -3.75/8*height, widthFromLeft/4);
     ctx.restore();
+    
+    ctx.fillText("Year",width/2, height-distFromBottom/2);
     
 
 }
