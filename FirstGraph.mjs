@@ -13,6 +13,8 @@ const percOfPop185 = numH185/numH;
 const percOfPopE = numHE/numH;
 
 export function drawFirstGraph(gID,years, threshold){
+    
+    
     if(threshold == "1.0"){
         drawGraph(gID,years,thresh13,thres1);
     }

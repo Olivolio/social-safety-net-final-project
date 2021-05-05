@@ -10,6 +10,7 @@ const percE = numE/usPop;
 
 export function drawPovertyGraph(gID, years){
 
+
     function child(pop){
         return Math.round(pop*percChild);
     }

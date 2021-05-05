@@ -31,6 +31,7 @@ const percI = numHI/numH;
 const pplPerH = 2.52;
 
 export function drawFoodInsecurity(gID,which, howMuch, howlong){
+   
     
     
     function insecure1(pop){
