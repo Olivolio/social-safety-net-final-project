@@ -92,18 +92,17 @@
 	<div id="landing">
 		<div class="landing-box">
 			<h1>Supplemental Nutrition Assistance Program (SNAP)</h1>
-			<h2>Lorem ipsum dolor sit amet, consectetur adipisicing elit</h2>
 		</div>
 	</div>
 	<div class="container">
 		<h2>About</h2>
-	<p>SNAP Benefits reduce food insecurity by up to 30%. This is thousands of parents who are able to feed their children. This is thousands of elderly who are able 
+	<p>SNAP or Suplemental Nutrition Assistance Program, previously called Food Stamps, is the main nationwide program in the USA that helps people afford food. To be eligible for SNAP, people have to be making less than 130% of the Poverty Line.
+        </p>
+        <p>SNAP Benefits reduce food insecurity for millions. This is thousands of parents who are able to feed their children. This is thousands of elderly who are able 
     to take their medication. Yet, food insecurity is still a major problem throughout the USA, despite what SNAP benefits do. So, we had to ask the question, What would happen
     if SNAP Benefits did more? How many more people would be able to have dinner on their table? How many more people would be lifted 
     from poverty? How many more people would survive?</p>
-    <p>This model compares the Poverty Rates, Death Rates, and Hunger Rates of what is happening right now versus what could happen if 
-    SNAP benefits were expanded in a variety of ways. Specifically, we look at expanding the upper limit for household income, expanding how 
-    much SNAP covers, and expanding SNAP to cover basic hygieine products (which it currently does not).</p>
+    <p>This model compares the Poverty Rates, Death Rates, and Hunger Rates of what is happening right now versus what could happen if the upper limit for household income was increased for SNAP benefits.</p>
 	
 	<div class="placeholder-graph">
 		<div class="controls">
@@ -139,29 +138,19 @@
 	</div>
 
 	<div class="container">
-		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-		proident, sunt in culpa qui officia deserunt mollit anim id est laborum.	
+		<p>	
 	</p>
 	</div>
 <div class="container">
 	<h2>Threshold vs. Eligibility</h2>
-	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-	tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-	quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-	consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-	cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-	proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+	<p>The Poverty Line is a measurement created by the Federal Government </p>
 	<div class="placeholder-graph">
 	</div>
 <table>
 	<tr>
-		<th>Columns</th>
-		<th>Columns</th>
-		<th>Columns</th>
+		<th></th>
+		<th></th>
+		<th></th>
 	</tr>
 	<tr>
 		<td>Columns</td>
@@ -184,12 +173,7 @@
 
 <div class="container">
 	<h2>Hunger</h2>
-	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-	tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-	quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-	consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-	cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-	proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+	<p></p>
 	<div class="placeholder-graph">
 		<div class="controls">
 			<h4>Controls</h4>
@@ -221,9 +205,43 @@
 		<canvas id="canvas-1" width="800" height="600"></canvas>
 	</div>
 </div>
+    
 
 
-
+<div class="container">
+	<h2>Poverty</h2>
+	<p></p>
+	<div class="placeholder-graph">
+		<div class="controls">
+			<h4>Controls</h4>
+			<div id="form-1">
+			<div>
+			<label for="threshold">Threshold</label><br>
+			<div class="range-bubble">
+			<input type="range" name="threshold" min="1.0" max="2" value="1.0" step="0.3">
+			<span>1.0</span>
+		</div>
+			</div>
+			<div>
+				<label for="bound">Choose a estimation bound:</label><br>
+				<select name="bound">
+				  <option value="lower">Lower bound</option>
+				  <option value="average">Average</option>
+				  <option value="upper">Upper bound</option>
+				</select>
+			</div>
+			<div>
+				<label for="years">Number of years to model:</label><br>
+				<div class="range-bubble">
+				<input type="range" name="years" min="5" max="40" value="10" step="5">
+			<span>10</span></div>
+			</div>
+			<button class="submit">Submit</button>
+			</div>
+		</div>
+		<canvas id="canvas-1" width="800" height="600"></canvas>
+	</div>
+</div>    
 
 
 
@@ -232,6 +250,7 @@
 	import{drawGraph} from "./Graph.mjs";
 	import{years, pop} from "./2Graphs.mjs";
 	import{mortality1, mortality2} from "./Equations.mjs";
+    import{drawFoodInsecurity} from "./FoodInsecurityGraph.mjs";
 
 
 	// Add value labels to all ranges
