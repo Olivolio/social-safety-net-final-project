@@ -200,7 +200,7 @@
 		</div>
 			</div>
 			<div>
-				<label for="bound">Choose a estimation bound:</label><br>
+				<label for="bound">Choose a estimation bound:</label>
 				<select name="bound">
 				  <option value="lower">Lower bound</option>
 				  <option value="average">Average</option>
@@ -230,21 +230,6 @@
 			<h4>Controls</h4>
 			<div id="form-2">
 			<div>
-			<label for="threshold">Threshold</label><br>
-			<div class="range-bubble">
-			<input type="range" name="threshold" min="1.0" max="2" value="1.0" step="0.3">
-			<span>1.0</span>
-		</div>
-			</div>
-			<div>
-				<label for="bound">Choose a estimation bound:</label><br>
-				<select name="bound">
-				  <option value="lower">Lower bound</option>
-				  <option value="average">Average</option>
-				  <option value="upper">Upper bound</option>
-				</select>
-			</div>
-			<div>
 				<label for="years">Number of years to model:</label><br>
 				<div class="range-bubble">
 				<input type="range" name="years" min="5" max="40" value="10" step="5">
@@ -253,7 +238,7 @@
 			<button class="submit">Submit</button>
 			</div>
 		</div>
-		<canvas id="canvas-1" width="800" height="600"></canvas>
+		<canvas id="canvas-2" width="800" height="600"></canvas>
 	</div>
 </div>    
 
@@ -264,6 +249,7 @@
 	import{drawGraph} from "./Graph.mjs";
 	import{mortality1, mortality2} from "./Equations.mjs";
     import{drawFoodInsecurity} from "./FoodInsecurityGraph.mjs";
+    import{drawPovertyGraph} from "./PovertyGraph.mjs";
 
 
 	// Add value labels to all ranges
@@ -291,20 +277,28 @@
 		const form = document.getElementById("form-" + formID);
 		console.log(form);
 		console.log(document.getElementById("canvas-" + formID));
+        
+        
+        
+        const years = parseInt(form.querySelector('input[name="years"]').value);
+        if(formID == 2){
+            drawPovertyGraph("canvas-2",years);
+            return false;
+        }
 
 		const threshold = form.querySelector('select[name="threshold"]').value;
 		const bound = form.querySelector('select[name="bound"]').value;
-		const years = parseInt(form.querySelector('input[name="years"]').value);
+		
 		console.log(threshold);
 		console.log(bound);
 		console.log(years);
 
 		if(formID == 1){
             var howMuch = .05;
-            if(bound == "Average"){
+            if(bound == "average"){
                 howMuch = .15;
             }
-            if(bound == "Upper bound"){
+            if(bound == "upper"){
                 howMuch = .3;
             }
             drawFoodInsecurity("canvas-1",threshold,howMuch,years);
