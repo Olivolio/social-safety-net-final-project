@@ -2,9 +2,7 @@
 <html>
 <head>
 	<title></title>
-	<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 
-	<script type="text/javascript" src="./literacy-data.js"></script>
 	<style type="text/css">
 		#landing {
 			padding:5rem 1rem;
@@ -143,29 +141,38 @@
 	</div>
 <div class="container">
 	<h2>Threshold vs. Eligibility</h2>
-	<p>The Poverty Line is a measurement created by the Federal Government </p>
+	<p>The Poverty Line is a measurement created by the Federal Government to determine who is eligible for a variety of programs. It is updated every year and is meant to represent the minimum amount of money a household would need to meet their basic needs.</p>
+    <p>These numbers represent the total gross income of a household for an entire year.</p>
 	<div class="placeholder-graph">
 	</div>
 <table>
 	<tr>
-		<th></th>
-		<th></th>
-		<th></th>
+		<th>Who?</th>
+        <th>Deep Poverty (50% of the Poverty Line)</th>
+		<th>The Poverty Line</th>
+		<th>130% of the Poverty Line</th>
+        <th>185% of the Poverty Line</th>
 	</tr>
 	<tr>
-		<td>Columns</td>
-		<td>Columns</td>
-		<td>Columns</td>
+		<td>A Single Person</td>
+        <td>$6,440</td>
+		<td>$12,880</td>
+		<td>$16,744</td>
+        <td>$23,828</td>
 	</tr>
 	<tr>
-		<td>Columns</td>
-		<td>Columns</td>
-		<td>Columns</td>
+		<td>A Family of Three</td>
+        <td>$10,980</td>
+		<td>$21,960</td>
+		<td>$28,548</td>
+        <td>$40,626</td>
 	</tr>
 	<tr>
-		<td>Columns</td>
-		<td>Columns</td>
-		<td>Columns</td>
+		<td>A Family of Five</td>
+        <td>$15,520</td>
+		<td>$31,040</td>
+		<td>$40,352</td>
+        <td>$57,424</td>
 	</tr>
 </table>
 
@@ -179,14 +186,21 @@
 			<h4>Controls</h4>
 			<div id="form-1">
 			<div>
-			<label for="threshold">Threshold</label><br>
-			<div class="range-bubble">
-			<input type="range" name="threshold" min="1.0" max="2" value="1.0" step="0.3">
-			<span>1.0</span>
+                
+            <label for="threshold">Choose a threshold:</label><br>
+
+            <select name="threshold">
+                    <option value="1.0">1.0</option>
+                    <option value="1.3">1.3</option>
+                    <option value="1.85">1.85</option>
+                    <option value="Everyone">Everyone</option>
+            </select>
+            <div>
+
 		</div>
 			</div>
 			<div>
-				<label for="bound">Choose a estimation bound:</label><br>
+				<label for="bound">Choose a estimation bound:</label>
 				<select name="bound">
 				  <option value="lower">Lower bound</option>
 				  <option value="average">Average</option>
@@ -214,22 +228,7 @@
 	<div class="placeholder-graph">
 		<div class="controls">
 			<h4>Controls</h4>
-			<div id="form-1">
-			<div>
-			<label for="threshold">Threshold</label><br>
-			<div class="range-bubble">
-			<input type="range" name="threshold" min="1.0" max="2" value="1.0" step="0.3">
-			<span>1.0</span>
-		</div>
-			</div>
-			<div>
-				<label for="bound">Choose a estimation bound:</label><br>
-				<select name="bound">
-				  <option value="lower">Lower bound</option>
-				  <option value="average">Average</option>
-				  <option value="upper">Upper bound</option>
-				</select>
-			</div>
+			<div id="form-2">
 			<div>
 				<label for="years">Number of years to model:</label><br>
 				<div class="range-bubble">
@@ -239,18 +238,34 @@
 			<button class="submit">Submit</button>
 			</div>
 		</div>
-		<canvas id="canvas-1" width="800" height="600"></canvas>
+		<canvas id="canvas-2" width="800" height="600"></canvas>
 	</div>
 </div>    
 
 
+<div style="padding: 2rem">
+    <h2>The Cost</h2>
+    <p>SNAP is the most important anti-hunger program in the USA. However, the benefits are surprisingly small. The average SNAP recipient receives about $127 a month, which is $4.17 a day or $1.39 per meal. Because SNAP helped nearly 38 Million people in 2019, SNAP still cost the federal government 63.5 Billion.</p>
+    <p>That is only $1,671 per recipient in 2019, or $443 dollars per taxpayer. For reference, the cost for a year of SNAP is about 8.6% of the US's military budget.</p>
+    <p>Increasing the cap for SNAP benefits from 130% of the poverty line to 185% of the poverty line would increase the number of people eligible for benefits by at most 66%. Since the amount of benefits depends on how much money a household makes, those who would theoretically be eligible and made between 130% to 185% of the poverty line would be receiving significantly less money than the present SNAP beneficiary.</p>
+    <p>Given this, it is estimated that moving the SNAP Cap to 185% of the poverty line would increase the cost of the whole SNAP program by at most 1/3.</p>
+</div>
 
 <p>Source: </p>
+    <a href="https://www.fns.usda.gov/pd/supplemental-nutrition-assistance-program-snap">General SNAP Information</a>
+    <a href = "https://www.fns.usda.gov/pd/supplemental-nutrition-assistance-program-snap">Participation and Cost</a>
+    <a href="https://jordanwjones.com/wp-content/uploads/2019/09/Courtemanche-Gregory-Jones-Marton-2019-The-Impacts-of-SNAP-Participation-on-Mortality-Rates.pdf">SNAP's Effect on Mortality Rates</a>
+    <a href="https://www.urban.org/sites/default/files/publication/28506/412065-How-Much-Does-SNAP-Reduce-Food-Insecurity-.PDF">SNAP's Effect on Food Insecurity</a>
+    <a href="https://www.cbpp.org/research/food-assistance/snap-is-linked-with-improved-nutritional-outcomes-and-lower-health-care#:~:text=SNAP%20is%20associated%20with%20improved,long%2Dterm%20health%20as%20adults">SNAP's Effect on Quality of Life</a>
+    <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6836787/">SNAP's Effects</a>
+    <a href="https://www.cbpp.org/research/food-assistance/a-quick-guide-to-snap-eligibility-and-benefits">How Much Are SNAP Benefits?</a>
+    <a href="https://www.census.gov/content/dam/Census/library/publications/2020/demo/acsbr20-01.pdf">Where People Use SNAP</a>
+    <a href="https://databank.worldbank.org/source/population-estimates-and-projections">Expected US Population Through 2060</a>
 <script type="module">
 	import{drawGraph} from "./Graph.mjs";
-	import{years, pop} from "./2Graphs.mjs";
 	import{mortality1, mortality2} from "./Equations.mjs";
     import{drawFoodInsecurity} from "./FoodInsecurityGraph.mjs";
+    import{drawPovertyGraph} from "./PovertyGraph.mjs";
 
 
 	// Add value labels to all ranges
@@ -278,17 +293,34 @@
 		const form = document.getElementById("form-" + formID);
 		console.log(form);
 		console.log(document.getElementById("canvas-" + formID));
+        
+        
+        
+        const years = parseInt(form.querySelector('input[name="years"]').value);
+        if(formID == 2){
+            drawPovertyGraph("canvas-2",years);
+            return false;
+        }
 
-		const threshold = parseFloat(form.querySelector('input[name="threshold"]').value);
+		const threshold = form.querySelector('select[name="threshold"]').value;
 		const bound = form.querySelector('select[name="bound"]').value;
-		const years = parseInt(form.querySelector('input[name="years"]').value);
+		
 		console.log(threshold);
 		console.log(bound);
 		console.log(years);
 
+		if(formID == 1){
+            var howMuch = .05;
+            if(bound == "average"){
+                howMuch = .15;
+            }
+            if(bound == "upper"){
+                howMuch = .3;
+            }
+            drawFoodInsecurity("canvas-1",threshold,howMuch,years);
+        }
 		
-		
-		drawGraph("canvas-" + formID, years, eq1, eq2);
+		//drawGraph("canvas-" + formID, years, eq1, eq2);
 
 		return false;
 	}
@@ -296,6 +328,9 @@
 function repeat(pop) {
 	return pop + 1;
 }
+    
+handleForm(1);
+handleForm(2);
 </script>
 </body>
 </html>
