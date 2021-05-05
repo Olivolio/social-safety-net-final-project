@@ -187,5 +187,18 @@ export function drawGraph(gID, howLong, Eqn1, Eqn2){
         
     }
     
+    // Axis Descriptors
+    
+    ctx.textAlign = "center";
+    ctx.fint = "24px serif";
+    
+    ctx.save();
+    //ctx.translate(100,300);
+    ctx.rotate(-0.5*Math.PI);
+
+    var rText = 'Rotated Text';
+    ctx.fillText("Number of People (In Thousands)" , -height*5/8, widthFromLeft/4);
+    ctx.restore();
+    
 
 }

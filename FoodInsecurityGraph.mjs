@@ -34,6 +34,9 @@ export function drawFoodInsecurity(gID,which, howMuch, howlong){
     
     
     function insecure1(pop){
+        var new1 = pop*percOfPop1*percIns1/(1-howMuch)*howMuch;
+        
+        return Math.round(new1);
     }
 
     function insecure13(pop){
@@ -64,13 +67,20 @@ export function drawFoodInsecurity(gID,which, howMuch, howlong){
         
     }
     
-    if(which == 1.85){
+    if(which == "1.85"){
+        console.log("DOING 185");
         drawGraph(gID, howlong, insecure13,insecure185);
     }
-    if(which == 100){
+    if(which == "Everyone"){
+        console.log("DOING EVERYONE");
         drawGraph(gID, howlong, insecure13,insecureE);
     }
-    if(which == 1){
+    if(which == "1.0"){
+        console.log("DOING 1");
         drawGraph(gID, howlong, insecure13, insecure1);
+    }
+    if(which == "1.3"){
+        console.log("DOING 13");
+        drawGraph(gID, howlong, insecure13, insecure13);
     }
 }
