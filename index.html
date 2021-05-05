@@ -44,7 +44,6 @@
 			margin:2rem 0;
 		}
 
-
 		table {
 			border-collapse: collapse;
 			width: 100%;
@@ -232,6 +231,7 @@
 <script type="module">
 	import{drawGraph} from "./Graph.mjs";
 	import{years, pop} from "./2Graphs.mjs";
+	import{mortality1, mortality2} from "./Equations.mjs";
 
 
 	// Add value labels to all ranges
@@ -260,11 +260,16 @@
 		console.log(form);
 		console.log(document.getElementById("canvas-" + formID));
 
-		const threshold = form.querySelector('input[name="threshold"]').value;
+		const threshold = parseFloat(form.querySelector('input[name="threshold"]').value);
 		const bound = form.querySelector('select[name="bound"]').value;
-		const years = form.querySelector('input[name="years"]').value;
-		console.log(threshold + " " + bound + " " + years)
-		drawGraph("canvas-" + formID, years, pop, repeat, repeat);
+		const years = parseInt(form.querySelector('input[name="years"]').value);
+		console.log(threshold);
+		console.log(bound);
+		console.log(years);
+
+		
+		
+		drawGraph("canvas-" + formID, years, eq1, eq2);
 
 		return false;
 	}
@@ -272,8 +277,6 @@
 function repeat(pop) {
 	return pop + 1;
 }
-drawGraph("intro-canvas", years, pop, repeat, repeat);
-
 </script>
 </body>
 </html>
