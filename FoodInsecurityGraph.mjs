@@ -68,19 +68,15 @@ export function drawFoodInsecurity(gID,which, howMuch, howlong){
     }
     
     if(which == "1.85"){
-        console.log("DOING 185");
         drawGraph(gID, howlong, insecure13,insecure185);
     }
     if(which == "Everyone"){
-        console.log("DOING EVERYONE");
         drawGraph(gID, howlong, insecure13,insecureE);
     }
     if(which == "1.0"){
-        console.log("DOING 1");
         drawGraph(gID, howlong, insecure13, insecure1);
     }
     if(which == "1.3"){
-        console.log("DOING 13");
         drawGraph(gID, howlong, insecure13, insecure13);
     }
 }
